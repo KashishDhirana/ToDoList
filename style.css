@@ -125,10 +125,6 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    & > button:first-child {
-      margin: 0 1rem;
-    }
-
     & > * /*This is all the buttons*/ {
       border: none;
       background-color: transparent;

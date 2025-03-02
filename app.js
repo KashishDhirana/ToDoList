@@ -25,9 +25,6 @@ const renderList = () => {
                 <button type="submit" title="delete task" class="done-btn">
                     <i class="fa-regular fa-trash-can"></i>
                 </button>
-                <button type="submit" title="update task" class="done-btn">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                </button>
             </div>
         `
         listContainer.appendChild(li)
@@ -48,9 +45,6 @@ const addData = (e) => {
         <div>
             <button type="submit" title="delete task" class="done-btn">
                 <i class="fa-regular fa-trash-can"></i>
-            </button>
-            <button type="submit" title="update task" class="done-btn">
-                <i class="fa-regular fa-pen-to-square"></i>
             </button>
         </div>
     `
