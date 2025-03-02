@@ -49,7 +49,7 @@ body {
   border-bottom: 0.1px solid;
   margin-bottom: 1rem;
   padding: 0 clamp(0.5rem, 1rem, 1rem);
-  transition: .15s ease-in-out;
+  transition: 0.15s ease-in-out;
 
   &:focus {
     outline: none;
@@ -74,7 +74,7 @@ body {
   background-color: #f1356d;
   color: white;
   cursor: pointer;
-  transition: .15s ease-in-out;
+  transition: 0.15s ease-in-out;
 
   &:hover {
     background-color: #ae274f;
@@ -136,7 +136,7 @@ body {
       & > * /*This is all the li's*/ {
         cursor: pointer;
         aspect-ratio: 1/1;
-        transition: .15s ease-in-out;
+        transition: 0.15s ease-in-out;
 
         &:hover {
           color: #f1356d;
@@ -164,7 +164,7 @@ body {
     color: white;
   }
   #inputText {
-    color: rgb(127, 127, 127);
+    color: rgb(250, 250, 250);
     background-color: transparent;
     border-color: #333;
     &::placeholder {
