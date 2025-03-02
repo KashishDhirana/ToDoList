@@ -1,7 +1,8 @@
 Light Mode
+
 ![Screenshot 2025-03-02 195746](https://github.com/user-attachments/assets/5e3a0f9e-c749-4c75-ba89-ece89ea90fa7)
-![Screenshot 2025-03-02 195805](https://github.com/user-attachments/assets/729ef41e-1d17-474b-8cc5-289977220406)
 ![Screenshot 2025-03-02 195758](https://github.com/user-attachments/assets/aac6f478-312a-452c-8b99-b51fc7940827)
+![Screenshot 2025-03-02 195805](https://github.com/user-attachments/assets/729ef41e-1d17-474b-8cc5-289977220406)
 
 Dark Mode
 ![Screenshot 2025-03-02 195823](https://github.com/user-attachments/assets/d429b084-69c0-4ad2-8f76-a64eeeadaa20)
