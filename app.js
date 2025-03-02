@@ -3,79 +3,86 @@ const operationContainer = document.querySelector('.list-container ul')
 const inputText = document.querySelector('#inputText')
 const addBtn = document.querySelector('#textSubmit')
 
-if (!listContainer || !inputText || !addBtn || !operationContainer) {
-    throw new Error('Element not found')
+// Type guard checks
+if (!(listContainer instanceof HTMLUListElement) ||
+    !(operationContainer instanceof HTMLUListElement) ||
+    !(inputText instanceof HTMLInputElement) ||
+    !(addBtn instanceof HTMLButtonElement)) {
+    throw new Error('Element not found or incorrect type')
 }
 
-let data = JSON.parse(localStorage.getItem("toDoList") || '[]')
-let size = Object.keys(data).length
-let li_id = parseInt(Object.keys(data)[size - 1]) || 0
-console.log(Object.keys(data)[size - 1])
-console.log(size, +li_id)
+let data = JSON.parse(localStorage.getItem("toDoList") || '{}')
+let li_id = Object.keys(data).length ? parseInt(Object.keys(data).pop() || '0') : 0
 
 const renderList = () => {
-    if (size) {
-        Object.keys(data).map((key) => {
-            listContainer.innerHTML +=
-                `
-                    <li data-id="${key}">${data[key]}
-                        <div>
-                            <button type="submit" title="delete task" class="done-btn">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </button>
-                            <button type="submit" title="update task" class="done-btn">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </button>
-                        </div>
-                    </li>
-                    `
-        })
-    }
+    listContainer.innerHTML = ''
+    Object.keys(data).forEach((key) => {
+        const li = document.createElement('li')
+        li.setAttribute('data-id', key)
+        li.innerHTML = `
+            ${data[key]}
+            <div>
+                <button type="submit" title="delete task" class="done-btn">
+                    <i class="fa-regular fa-trash-can"></i>
+                </button>
+                <button type="submit" title="update task" class="done-btn">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+            </div>
+        `
+        listContainer.appendChild(li)
+    })
     console.log('Data:', data)
 }
 
 renderList()
 
-addBtn?.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') {
-        console.log("Hello");
-    }
-})
-addBtn?.addEventListener('click', () => {
+const addData = (e) => {
     const text = inputText.value.trim()
     if (!text) return
-    console.log(text)
     inputText.value = ''
-    listContainer.innerHTML += `
-                    <li data-id="${++li_id}">${text}
-                        <div>
-                            <button type="submit" title="delete task" class="done-btn">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </button>
-                            <button type="submit" title="update task" class="done-btn">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </button>
-                        </div>
-                    </li>`
-    data = {
-        [li_id]: text, // To change the key to a string value we wrap it in square brackets to dynamically assign the key
-        ...data
-    }
+    const li = document.createElement('li')
+    li.setAttribute('data-id', (++li_id).toString())
+    li.innerHTML = `
+        ${text}
+        <div>
+            <button type="submit" title="delete task" class="done-btn">
+                <i class="fa-regular fa-trash-can"></i>
+            </button>
+            <button type="submit" title="update task" class="done-btn">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+        </div>
+    `
+    listContainer.appendChild(li)
+    data[li_id] = text
     localStorage.setItem("toDoList", JSON.stringify(data))
+}
+
+inputText.addEventListener('keypress', (e) => {
+    if (!(e instanceof KeyboardEvent)) return
+    if (e.key === 'Enter') {
+        addData()
+    }
 })
 
-operationContainer?.addEventListener('click', (e) => {
-    if (!e.target) return
-    if (e.target.tagName.toLowerCase() === 'i') {
-        console.log('Icon clicked:', e.target, e)
+addBtn.addEventListener('click', addData)
+
+operationContainer.addEventListener('click', (e) => {
+    const target = e.target
+    if (!target) return
+    if (!(target instanceof HTMLElement)) return
+    if (target.tagName.toLowerCase() === 'i') {
+        console.log('Icon clicked:', target, e)
     }
-    const value = e.target.parentNode.parentNode.parentNode.getAttribute('data-id')
+    const li = target.closest('li')
+    if (!li) return
+    const value = li.getAttribute('data-id')
+    if (!value) return
     console.log('Value:', value)
-    if (e.target.className === 'fa-regular fa-trash-can') {
+    if (target.classList.contains('fa-trash-can')) {
         delete data[value]
-        listContainer.innerHTML = ''
         renderList()
     }
     localStorage.setItem("toDoList", JSON.stringify(data))
 })
-
