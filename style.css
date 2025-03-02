@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+  /* outline: 1px solid red; */
+  background-color: transparent;
+}
+
+body {
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  height: 80%;
+  /* max-width: 40%; */
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+
+  & > h1 {
+    font-size: 4rem;
+  }
+
+  & > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.input-container > div,
+.list-container,
+.list-container ul {
+  width: 100%;
+}
+
+.input-container input {
+  width: clamp(8rem, 100%, 100%);
+  border: none;
+  border-bottom: 0.1px solid;
+  margin-bottom: 1rem;
+  padding: 0 clamp(0.5rem, 1rem, 1rem);
+  transition: .15s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid;
+  }
+  border-color: black;
+}
+
+.input-container input,
+.input-container button {
+  font-size: 1.5rem;
+}
+
+.list-container li {
+  font-size: 1.5rem;
+  padding: 0 1rem;
+}
+
+.input-container > div:first-child > button {
+  width: clamp(8rem, 100%, 100%);
+  border: none;
+  background-color: #f1356d;
+  color: white;
+  cursor: pointer;
+  transition: .15s ease-in-out;
+
+  &:hover {
+    background-color: #ae274f;
+  }
+}
+
+.disabled {
+  background-color: #711430;
+  color: white;
+  cursor: not-allowed;
+}
+
+.list-container {
+  flex: 1;
+  display: block;
+  overflow-y: auto;
+  scrollbar-width: 0; /* For firefox */
+  -ms-overflow-style: none; /* For IE 10+ */
+}
+
+/* For Chrome, Safari */
+.list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.list-container ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+  /* padding: 0 clamp(0.5rem, 1rem, 1rem); */
+  user-select: none;
+
+  &:nth-child(odd) {
+    background-color: #f8f8f8;
+  }
+  &:nth-child(even) {
+    background-color: #f0f0f0;
+  }
+
+  & i {
+    font-size: 1.5rem;
+  }
+
+  & div {
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > button:first-child {
+      margin: 0 1rem;
+    }
+
+    & > * /*This is all the buttons*/ {
+      border: none;
+      background-color: transparent;
+
+      & > * /*This is all the li's*/ {
+        cursor: pointer;
+        aspect-ratio: 1/1;
+        transition: .15s ease-in-out;
+
+        &:hover {
+          color: #f1356d;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 80%;
+
+    & > h1 {
+      font-size: 3rem;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+  }
+  h1 {
+    color: white;
+  }
+  #inputText {
+    color: rgb(127, 127, 127);
+    background-color: transparent;
+    border-color: #333;
+    &::placeholder {
+      color: rgb(127, 127, 127);
+    }
+    &:focus {
+      border-bottom: 1px solid rgb(127, 127, 127);
+    }
+  }
+  .list-container ul li {
+    color: white;
+    &:nth-child(odd) {
+      background-color: #333;
+    }
+    &:nth-child(even) {
+      background-color: #222;
+    }
+    & i {
+      color: white;
+    }
+  }
+}
